@@ -1,5 +1,5 @@
 @extends('templates.master')
-@section('title','Anggota')
+@section('title','Buku')
 @section('head')
 <link rel="stylesheet" href="{{ asset('paper-admin\plugin\datatables\media\css\dataTables.bootstrap4.min.css') }}">
 @endsection
@@ -7,7 +7,7 @@
 <div class="card">
     <div class="card-header">
         <h4 class="text-secondary">
-            DAFTAR ANGGOTA
+            DAFTAR BUKU
         </h4>
     </div>
     <div class="card-body">
@@ -16,10 +16,15 @@
                 <table class="table" id="datatable">
                     <thead>
                         <tr>
-                            <th>Nama</th>
-                            <th>Email</th>
-                            <th>Telepon</th>
-                            <th>Aksi</th>
+                            <th>JUDUL</th>
+                            <th>PENGARANG</th>
+                            <th>PENERBIT</th>
+                            <th>ISBN</th>
+                            <th>NOMOR CETAK</th>
+                            <th>JUMLAH HALAMAN</th>
+                            <th>TAHUN TERBIT</th>
+                            <th>SINOPSIS</th>
+                            <th>COVER</th>
                         </tr>
                     </thead>
                 </table>
@@ -35,12 +40,17 @@
     let table = $('#datatable').DataTable({
 	      	serverSide: true,
 	      	processing: true,
-	      	ajax: '{{ route('anggota.index') }}',
+	      	ajax: '{{ route('buku.index') }}',
 	      	columns: [
-	      		{data: 'nama_lengkap'},
-	      		{data: 'email'},
-	      		{data: 'telepon'},
-	      		{data: 'aksi'},
+	      		{data: 'judul'},
+	      		{data: 'pengarang'},
+	      		{data: 'penerbit'},
+	      		{data: 'isbn'},
+	      		{data: 'nomor_cetak'},
+	      		{data: 'jumlah_halaman'},
+	      		{data: 'tahun_terbit'},
+	      		{data: 'Sinopsis'},
+	      		{data: 'Cover'},
               ],
 	    });
 </script>

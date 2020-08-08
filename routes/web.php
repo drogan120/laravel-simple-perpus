@@ -18,3 +18,4 @@ Route::get('/', function () {
 });
 
 Route::resource('anggota', 'AnggotaController');
+Route::resource('buku', 'BukuController');
