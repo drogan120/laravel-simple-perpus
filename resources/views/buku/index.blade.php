@@ -4,11 +4,18 @@
 <link rel="stylesheet" href="{{ asset('paper-admin\plugin\datatables\media\css\dataTables.bootstrap4.min.css') }}">
 @endsection
 @section('content')
+<h5 class="text-secondary">
+    DAFTAR BUKU
+</h5>
 <div class="card">
     <div class="card-header">
-        <h4 class="text-secondary">
-            DAFTAR BUKU
-        </h4>
+        <div class="d-inline">
+            <div class="float-right">
+                <a href="#" class="btn btn-sm btn-warning">IMPORT</a>
+                <a href="#" class="btn btn-sm btn-danger">EXPORT</a>
+                <a href="#" class="btn btn-sm btn-primary">TAMBAH</a>
+            </div>
+        </div>
     </div>
     <div class="card-body">
         <div class="row">
