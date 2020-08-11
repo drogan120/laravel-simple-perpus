@@ -4,11 +4,20 @@
 <link rel="stylesheet" href="{{ asset('paper-admin\plugin\datatables\media\css\dataTables.bootstrap4.min.css') }}">
 @endsection
 @section('content')
+<h5 class="text-secondary">
+    Daftar Anggota
+</h5>
 <div class="card">
     <div class="card-header">
-        <h4 class="text-secondary">
-            DAFTAR ANGGOTA
-        </h4>
+        <div class="d-inline">
+            <div class="float-right">
+                <button type="button" class="btn btn-sm btn-danger" data-toggle="modal"
+                    data-target="#ModalImportExport">
+                    Import / Export
+                </button>
+                <a href="#" class="btn btn-sm btn-primary">TAMBAH</a>
+            </div>
+        </div>
     </div>
     <div class="card-body">
         <div class="row">
@@ -23,6 +32,61 @@
                         </tr>
                     </thead>
                 </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Import-Export-->
+<div class="modal fade" id="ModalImportExport" tabindex="-1" role="dialog" aria-labelledby="ModalImportExportTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalImportExportTitle">Import / Export Anggota</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="text-secondary">
+                                    Export
+                                </h4>
+                            </div>
+                            <div class="card-body">
+                                <a href="{{ route('anggota.exportexcel')}}" class="btn btn-sm btn-danger">Export
+                                    Excel</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="text-secondary">
+                                    Import
+                                </h4>
+                                <div class="card-body">
+                                    <form enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="form-group">
+                                            <label for="importexcel">Import Excel</label>
+                                            <input type="text" class="form-control" name="importexcel">
+                                        </div>
+                                        <button type="submit" class="btn btn-sm btn-info">Import</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-sm btn-primary">Save changes</button>
+                </div>
             </div>
         </div>
     </div>

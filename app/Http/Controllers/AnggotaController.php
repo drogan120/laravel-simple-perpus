@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\AnggotaExport;
 use App\Model\Anggota;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
 class AnggotaController extends Controller
@@ -46,5 +48,10 @@ class AnggotaController extends Controller
 
     public function destroy()
     {
+    }
+
+    public function exportexcel()
+    {
+        return Excel::download(new AnggotaExport, 'anggota.xlsx');
     }
 }

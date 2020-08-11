@@ -5,7 +5,7 @@
 @endsection
 @section('content')
 <h5 class="text-secondary">
-    DAFTAR BUKU
+    Daftar Buku
 </h5>
 <div class="card">
     <div class="card-header">
@@ -13,7 +13,7 @@
             <div class="float-right">
                 <button type="button" class="btn btn-sm btn-danger" data-toggle="modal"
                     data-target="#ModalImportExport">
-                    Import/Export
+                    Import / Export
                 </button>
                 <a href="#" class="btn btn-sm btn-primary">TAMBAH</a>
             </div>
@@ -49,7 +49,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="ModalImportExportTitle">Import /Export Buku</h5>
+                <h5 class="modal-title" id="ModalImportExportTitle">Import / Export Buku</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -95,12 +95,13 @@
             </div>
         </div>
     </div>
-    @endsection
-    @section('foot')
-    <script src="{{ asset('paper-admin\plugin\datatables\media\js\jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('paper-admin\plugin\datatables\media\js\dataTables.bootstrap4.min.js') }}"></script>
-    <script>
-        let table = $('#datatable').DataTable({
+</div>
+@endsection
+@section('foot')
+<script src="{{ asset('paper-admin\plugin\datatables\media\js\jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('paper-admin\plugin\datatables\media\js\dataTables.bootstrap4.min.js') }}"></script>
+<script>
+    let table = $('#datatable').DataTable({
 	      	serverSide: true,
 	      	processing: true,
 	      	ajax: '{{ route('buku.index') }}',
@@ -116,5 +117,5 @@
 	      		{data: 'cover'},
               ],
 	    });
-    </script>
-    @endsection
+</script>
+@endsection
