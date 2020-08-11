@@ -12,6 +12,7 @@ class PeminjamanController extends Controller
     {
         $data = DB::table('anggota')->join('peminjaman', 'anggota.id', '=', 'peminjaman.anggota_id')->join('buku', 'buku.id', '=', 'peminjaman.buku_id')->get();
 
+
         if ($request->ajax()) {
             return DataTables::of($data)
                 ->addColumn('aksi', function ($row) {

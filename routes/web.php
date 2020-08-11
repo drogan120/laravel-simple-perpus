@@ -18,5 +18,7 @@ Route::get('/', function () {
 });
 
 Route::resource('anggota', 'AnggotaController');
+
+Route::get('buku/exportexcel', 'BukuController@exportexcel')->name('buku.exportexcel');
 Route::resource('buku', 'BukuController');
 Route::resource('peminjaman', 'PeminjamanController');

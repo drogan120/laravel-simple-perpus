@@ -22,7 +22,7 @@ class CreateBukuTable extends Migration
             $table->string('nomor_cetak');
             $table->string('jumlah_halaman', 8);
             $table->year('tahun_terbit');
-            $table->year('sinopsis')->nullable();
+            $table->text('sinopsis')->nullable();
             $table->string('cover')->nullable();
             $table->timestamps();
         });
