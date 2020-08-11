@@ -12,5 +12,11 @@
                 <p>Anggota</p>
             </a>
         </li>
+        <li class="active">
+            <a href="{{ route('peminjaman.index') }}">
+                <i class="nc-icon nc-single-02"></i>
+                <p>Peminjaman</p>
+            </a>
+        </li>
     </ul>
 </div>

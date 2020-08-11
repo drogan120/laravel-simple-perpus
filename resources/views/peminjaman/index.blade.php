@@ -1,11 +1,11 @@
 @extends('templates.master')
-@section('title','Buku')
+@section('title','Peminjaman')
 @section('head')
 <link rel="stylesheet" href="{{ asset('paper-admin\plugin\datatables\media\css\dataTables.bootstrap4.min.css') }}">
 @endsection
 @section('content')
 <h5 class="text-secondary">
-    DAFTAR BUKU
+    DAFTAR Pinjaman
 </h5>
 <div class="card">
     <div class="card-header">
@@ -23,15 +23,14 @@
                 <table class="table" id="datatable">
                     <thead>
                         <tr>
-                            <th>JUDUL</th>
-                            <th>PENGARANG</th>
-                            <th>PENERBIT</th>
-                            <th>ISBN</th>
-                            <th>NOMOR CETAK</th>
-                            <th>JUMLAH HALAMAN</th>
-                            <th>TAHUN TERBIT</th>
-                            <th>SINOPSIS</th>
-                            <th>COVER</th>
+                            <th>Nama</th>
+                            <th>Judul Buku</th>
+                            <th>TELEPON</th>
+                            <th>Email</th>
+                            <th>Tanggal Pinjam</th>
+                            <th>Tanggal Kembali</th>
+                            <th>Sisa Waktu</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                 </table>
@@ -47,17 +46,16 @@
     let table = $('#datatable').DataTable({
 	      	serverSide: true,
 	      	processing: true,
-	      	ajax: '{{ route('buku.index') }}',
+	      	ajax: '{{ route('peminjaman.index') }}',
 	      	columns: [
+	      		{data: 'nama_lengkap'},
 	      		{data: 'judul'},
-	      		{data: 'pengarang'},
-	      		{data: 'penerbit'},
-	      		{data: 'isbn'},
-	      		{data: 'nomor_cetak'},
-	      		{data: 'jumlah_halaman'},
-	      		{data: 'tahun_terbit'},
-	      		{data: 'sinopsis'},
-	      		{data: 'cover'},
+	      		{data: 'telepon'},
+	      		{data: 'email'},
+	      		{data: 'tanggal_pinjam'},
+	      		{data: 'tanggal_kembali'},
+	      		{data: 'sisa_waktu'},
+	      		{data: 'aksi'},
               ],
 	    });
 </script>
