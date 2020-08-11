@@ -29,9 +29,8 @@
                             <th>Judul Buku</th>
                             <th>TELEPON</th>
                             <th>Email</th>
-                            <th>Tanggal Pinjam</th>
-                            <th>Tanggal Kembali</th>
                             <th>Sisa Waktu</th>
+                            <th>Denda</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -108,9 +107,8 @@
 	      		{data: 'judul'},
 	      		{data: 'telepon'},
 	      		{data: 'email'},
-	      		{data: 'tanggal_pinjam'},
-	      		{data: 'tanggal_kembali'},
 	      		{data: 'sisa_waktu'},
+	      		{data: 'denda'},
 	      		{data: 'aksi'},
               ],
 	    });
