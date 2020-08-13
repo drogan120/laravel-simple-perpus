@@ -15,7 +15,7 @@
                     data-target="#ModalImportExport">
                     Import / Export
                 </button>
-                <a href="#" class="btn btn-sm btn-primary">TAMBAH</a>
+                <a href="javascript:void(0)" class="btn btn-sm btn-primary" id="create"></i> Tambah</a>
             </div>
         </div>
     </div>
@@ -28,12 +28,9 @@
                             <th>JUDUL</th>
                             <th>PENGARANG</th>
                             <th>PENERBIT</th>
-                            <th>ISBN</th>
-                            <th>NOMOR CETAK</th>
-                            <th>JUMLAH HALAMAN</th>
-                            <th>TAHUN TERBIT</th>
                             <th>SINOPSIS</th>
                             <th>COVER</th>
+                            <th>AKSI</th>
                         </tr>
                     </thead>
                 </table>
@@ -41,7 +38,26 @@
         </div>
     </div>
 </div>
+{{-- Modal Buku --}}
+<div class="modal fade" id="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="modal-header"></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
 
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary float-right" id="save">Simpan</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Modal Import-Export-->
 <div class="modal fade" id="ModalImportExport" tabindex="-1" role="dialog" aria-labelledby="ModalImportExportTitle"
@@ -109,13 +125,81 @@
 	      		{data: 'judul'},
 	      		{data: 'pengarang'},
 	      		{data: 'penerbit'},
-	      		{data: 'isbn'},
-	      		{data: 'nomor_cetak'},
-	      		{data: 'jumlah_halaman'},
-	      		{data: 'tahun_terbit'},
 	      		{data: 'sinopsis'},
 	      		{data: 'cover'},
+	      		{data: 'aksi'},
               ],
 	    });
+
+    // Click Modal
+    $('#create').click(function()  {
+        $('#save').html('Simpan');
+        $('#id').val('');
+        $('#form').trigger('reset');
+        $('#modal-header').html('Tambah Buku Baru');
+        $('#modal').modal('show');
+    });
+
+    $('body').on('click','.edit',function () {
+        let id = $(this).data('id');
+        $.get('{{ route('buku.index') }}'+'/'+ id +'/edit', function(data){
+            $('#modal-header').html('Ubah Buku');
+            $('#save').html('Ubah');
+            $('#modal').modal('show');
+            $('#id').val(data.id);
+            $('#nim').val(data.nim);
+            $('#nama').val(data.nama);
+            $('#email').val(data.email);
+            $('#jenis_kelamin').val(data.jenis_kelamin);
+            $('#telepon').val(data.telepon);
+            $('#tempat_lahir').val(data.tempat_lahir);
+            $('#tanggal_lahir').val(data.tanggal_lahir);
+            $('#mata_kuliah').val(data.mata_kuliah);
+            $('#alamat').val(data.alamat);
+
+        });
+    });
+
+    $('body').on('click', '.delete', function(){
+        var id = $(this).data('id');
+        Swal.fire({
+        title: 'Hapus data ?',
+        text: "Data tidak dapat di kembalikan jika di hapus!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Hapus!',
+        cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: 'DELETE',
+                    url: '{{ url('buku') }}'+ '/' + id,
+                    data: {
+                        '_token': '{{ csrf_token() }}',
+                        'id': id
+                    },
+                    success: function(data) {
+                        table.draw();
+                        Swal.fire(
+                            'Berhasil!',
+                            data.success,
+                            'success'
+                        )
+                    },
+                    error: function (data) {
+                        console.log('Error', data);
+                    }
+                });
+            }
+        })
+    });
 </script>
+@if (session()->has('success'))
+<script>
+    Swal.fire('Berhasil!','{{session('success')}}','success');
+</script>
+@endif
+
 @endsection
