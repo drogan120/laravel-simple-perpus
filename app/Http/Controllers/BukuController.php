@@ -40,7 +40,7 @@ class BukuController extends Controller
 
     public function destroy($id)
     {
-        $dosen = Dosen::find($id);
+        $dosen = Buku::find($id);
         $dosen->delete();
         return response()->json([
             'success'   => 'Data berhasil dihapus!'
