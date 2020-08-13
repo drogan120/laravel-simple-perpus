@@ -29,6 +29,8 @@ class BukuExport implements FromCollection, WithHeadings
             'tahun_terbit',
             'sinopsis',
             'cover',
+            'created_at',
+            'updated_at',
         ];
     }
 }

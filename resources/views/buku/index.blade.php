@@ -139,11 +139,12 @@
                                     Import
                                 </h4>
                                 <div class="card-body">
-                                    <form enctype="multipart/form-data">
+                                    <form enctype="multipart/form-data" action="{{ route('buku.importexcel')}}"
+                                        method="POST">
                                         @csrf
-                                        <div class="form-group">
+                                        <div class="form-group btn btn-danger">
                                             <label for="importexcel">Import Excel</label>
-                                            <input type="text" class="form-control" name="importexcel">
+                                            <input type="file" class="form-control" name="data_buku_excel">
                                         </div>
                                         <button type="submit" class="btn btn-sm btn-info">Import</button>
                                     </form>
@@ -154,7 +155,6 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-sm btn-primary">Save changes</button>
                 </div>
             </div>
         </div>
@@ -264,7 +264,7 @@
                     },
                     success: function(data) {
                         table.draw();
-                        Swal.fire(
+                        Toast.fire(
                             'Berhasil!',
                             data.success,
                             'success'

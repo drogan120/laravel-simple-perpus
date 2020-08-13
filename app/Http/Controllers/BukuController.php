@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\BukuExport;
+use App\Imports\BukuImport;
 use App\Model\Buku;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -78,6 +79,13 @@ class BukuController extends Controller
         return response()->json([
             'success'   => 'Data berhasil dihapus!'
         ], 200);
+    }
+
+    public function importexcel(Request $request)
+    {
+
+        Excel::import(new BukuImport, $request->file('data_buku_excel'));
+        return redirect('/buku')->with('success', 'Buku berhasil di import');
     }
 
     public function exportexcel()

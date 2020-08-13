@@ -20,6 +20,7 @@ Route::get('/', function () {
 Route::get('anggota/exportexcel', 'AnggotaController@exportexcel')->name('anggota.exportexcel');
 Route::resource('anggota', 'AnggotaController');
 
+Route::post('buku/importexcel', 'BukuController@importexcel')->name('buku.importexcel');
 Route::get('buku/exportexcel', 'BukuController@exportexcel')->name('buku.exportexcel');
 Route::resource('buku', 'BukuController');
 
