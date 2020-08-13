@@ -197,6 +197,32 @@
         $('#modal').modal('show');
     });
 
+ // Fungsi Save
+ $('#save').click(function(e){
+        e.preventDefault();
+        $(this).html('Menyimpan...');
+        $.ajax({
+            data: $('#form').serialize(),
+            url: '{{ route('buku.store') }}',
+            type: 'POST',
+            dataType: 'JSON',
+            success: function(data) {
+                $('#save').html('Simpan');
+                $('#form').trigger('reset');
+                $('#modal').modal('hide');
+                table.draw();
+                Toast.fire({
+                    icon: 'success',
+                    title: data.success
+                })
+            },
+            error: function(data){
+                console.log('Error', data);
+            }
+        })
+    });
+
+
     $('body').on('click','.edit',function () {
         let id = $(this).data('id');
         $.get('{{ route('buku.index') }}'+'/'+ id +'/edit', function(data){
@@ -225,7 +251,7 @@
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Hapus!',
+        confirmButtonText: 'Hapus !',
         cancelButtonText: 'Batal'
         }).then((result) => {
             if (result.value) {

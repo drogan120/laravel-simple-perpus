@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exports\BukuExport;
 use App\Model\Buku;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -27,9 +28,41 @@ class BukuController extends Controller
         return view('buku.index', compact('buku'));
     }
 
-    public function exportexcel()
+    public function store(Request $request)
     {
-        return Excel::download(new BukuExport, 'buku.xlsx');
+
+        $input  = $request->all();
+        $rule   = [
+            'judul'           => 'required',
+            'pengarang'          => 'required',
+            'penerbit'         => 'required',
+            'isbn' => 'required',
+            'nomor_cetak'       => 'required',
+            'jumlah_halaman'  => 'required',
+            'tahun_terbit'     => 'required',
+            'sinopsis'    => 'nullable',
+
+        ];
+        $validation = Validator::make($input, $rule);
+        if ($validation->fails()) {
+            return response()->json([
+                'error' => 'Kesalahan saat mengisi form!'
+            ], 422);
+        }
+        $buku = Buku::updateOrCreate(['id' => $request->id], [
+            'judul'           => $request->judul,
+            'pengarang'          => $request->pengarang,
+            'penerbit'          => $request->penerbit,
+            'isbn'         => $request->isbn,
+            'nomor_cetak' => $request->nomor_cetak,
+            'jumlah_halaman'       => $request->jumlah_halaman,
+            'tahun_terbit'  => $request->tahun_terbit,
+            'sinopsis' => $request->sinopsis,
+        ]);
+        return response()->json([
+            'success'   => 'Data berhasil disimpan!',
+            'data'      => $buku
+        ], 200);
     }
 
     function edit($id)
@@ -40,10 +73,15 @@ class BukuController extends Controller
 
     public function destroy($id)
     {
-        $dosen = Buku::find($id);
-        $dosen->delete();
+        $buku = Buku::find($id);
+        $buku->delete();
         return response()->json([
             'success'   => 'Data berhasil dihapus!'
         ], 200);
+    }
+
+    public function exportexcel()
+    {
+        return Excel::download(new BukuExport, 'buku.xlsx');
     }
 }
