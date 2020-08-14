@@ -64,8 +64,10 @@ class AnggotaController extends Controller
     {
     }
 
-    public function edit()
+    public function edit($id)
     {
+        $anggota = Anggota::find($id);
+        return response()->json($anggota);
     }
 
     public function update()

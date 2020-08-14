@@ -53,6 +53,7 @@
                     @csrf
                     <div class="form-group">
                         <label for="nama">Nama</label>
+                        <input type="hidden" name="id" id="id">
                         <input type="text" name="nama" class="form-control" id="nama">
                     </div>
                     <div class="form-group">
@@ -200,14 +201,10 @@
             $('#save').html('Ubah');
             $('#modal').modal('show');
             $('#id').val(data.id);
-            $('#judul').val(data.judul);
-            $('#pengarang').val(data.pengarang);
-            $('#penerbit').val(data.penerbit);
-            $('#isbn').val(data.isbn);
-            $('#nomor_cetak').val(data.nomor_cetak);
-            $('#jumlah_halaman').val(data.jumlah_halaman);
-            $('#tahun_terbit').val(data.tahun_terbit);
-            $('#sinopsis').html(data.sinopsis);
+            $('#nama').val(data.nama_lengkap);
+            $('#email').val(data.email);
+            $('#telepon').val(data.telepon);
+            $('#alamat').html(data.alamat);
 
         });
     });
