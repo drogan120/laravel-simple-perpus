@@ -2,6 +2,7 @@
 @section('title','Anggota')
 @section('head')
 <link rel="stylesheet" href="{{ asset('paper-admin\plugin\datatables\media\css\dataTables.bootstrap4.min.css') }}">
+<link rel="stylesheet" href="{{ asset('paper-admin\plugin\sweetalert2-theme-bootstrap-4\bootstrap-4.min.css') }}">
 @endsection
 @section('content')
 <h5 class="text-secondary">
@@ -37,7 +38,7 @@
     </div>
 </div>
 
-{{-- Modal Buku --}}
+{{-- Modal anggota --}}
 <div class="modal fade" id="modal">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -51,49 +52,20 @@
                 <form id="form" name="form" class="form-horizontal" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
-                        <label for="judul">Judul</label>
-                        <input type="hidden" name="id" id="id">
-                        <input type="text" class="form-control" name="judul" id="judul">
+                        <label for="nama">Nama</label>
+                        <input type="text" name="nama" class="form-control" id="nama">
                     </div>
                     <div class="form-group">
-                        <label for="pengarang">Pengarang</label>
-                        <input type="text" name="pengarang" class="form-control" id="pengarang">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" class="form-control" id="email">
                     </div>
                     <div class="form-group">
-                        <label for="penerbit">Penerbit</label>
-                        <input type="text" name="penerbit" class="form-control" id="penerbit">
+                        <label for="telepon">Telepon</label>
+                        <input type="text" name="telepon" class="form-control" id="telepon">
                     </div>
                     <div class="form-group">
-                        <label for="isbn">ISBN</label>
-                        <input type="text" name="isbn" class="form-control" id="isbn">
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="nomor_cetak">No. Cetak</label>
-                                <input type="text" name="nomor_cetak" class="form-control" id="nomor_cetak">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="jumlah_halaman">Jumlah Halaman</label>
-                                <input type="number" name="jumlah_halaman" class="form-control" id="jumlah_halaman">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="tahun_terbit">Tahun Terbit</label>
-                                <input type="year" name="tahun_terbit" class="form-control" id="tahun_terbit">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="sinopsis">Sinopsis</label>
-                        <textarea name="sinopsis" id="sinopsis" class="form-control"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="cover">Cover</label>
-                        <input type="file" name="cover" id="cover" class="form-control btn btn-info">
+                        <label for="alamat">Alamat</label>
+                        <textarea name="alamat" id="alamat" class="form-control"></textarea>
                     </div>
             </div>
             <div class="modal-footer">
@@ -163,7 +135,17 @@
 @section('foot')
 <script src="{{ asset('paper-admin\plugin\datatables\media\js\jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('paper-admin\plugin\datatables\media\js\dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('paper-admin\plugin\sweetalert2\sweetalert2.min.js') }}"></script>
+<script src="{{ asset('paper-admin\plugin\toastr\toastr.min.js') }}"></script>
+
 <script>
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000
+    });
+
     let table = $('#datatable').DataTable({
 	      	serverSide: true,
 	      	processing: true,
@@ -175,5 +157,100 @@
 	      		{data: 'aksi'},
               ],
 	    });
+
+    // Click Modal
+    $('#create').click(function()  {
+        $('#save').html('Simpan');
+        $('#id').val('');
+        $('#form').trigger('reset');
+        $('#modal-header').html('Tambah Anggota');
+        $('#modal').modal('show');
+    });
+
+ // Fungsi Save
+ $('#save').click(function(e){
+        e.preventDefault();
+        $(this).html('Menyimpan...');
+        $.ajax({
+            data: $('#form').serialize(),
+            url: '{{ route('anggota.store') }}',
+            type: 'POST',
+            dataType: 'JSON',
+            success: function(data) {
+                $('#save').html('Simpan');
+                $('#form').trigger('reset');
+                $('#modal').modal('hide');
+                table.draw();
+                Toast.fire({
+                    icon: 'success',
+                    title: data.success
+                })
+            },
+            error: function(data){
+                console.log('Error', data);
+            }
+        })
+    });
+
+
+    $('body').on('click','.edit',function () {
+        let id = $(this).data('id');
+        $.get('{{ route('anggota.index') }}'+'/'+ id +'/edit', function(data){
+            $('#modal-header').html('Ubah anggota');
+            $('#save').html('Ubah');
+            $('#modal').modal('show');
+            $('#id').val(data.id);
+            $('#judul').val(data.judul);
+            $('#pengarang').val(data.pengarang);
+            $('#penerbit').val(data.penerbit);
+            $('#isbn').val(data.isbn);
+            $('#nomor_cetak').val(data.nomor_cetak);
+            $('#jumlah_halaman').val(data.jumlah_halaman);
+            $('#tahun_terbit').val(data.tahun_terbit);
+            $('#sinopsis').html(data.sinopsis);
+
+        });
+    });
+
+    $('body').on('click', '.delete', function(){
+        var id = $(this).data('id');
+        Swal.fire({
+        title: 'Hapus data ?',
+        text: "Data tidak dapat di kembalikan jika di hapus!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Hapus !',
+        cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: 'DELETE',
+                    url: '{{ url('anggota') }}'+ '/' + id,
+                    data: {
+                        '_token': '{{ csrf_token() }}',
+                        'id': id
+                    },
+                    success: function(data) {
+                        table.draw();
+                        Toast.fire(
+                            'Berhasil!',
+                            data.success,
+                            'success'
+                        )
+                    },
+                    error: function (data) {
+                        console.log('Error', data);
+                    }
+                });
+            }
+        })
+    });
 </script>
+@if (session()->has('success'))
+<script>
+    Swal.fire('Berhasil!','{{session('success')}}','success');
+</script>
+@endif
 @endsection

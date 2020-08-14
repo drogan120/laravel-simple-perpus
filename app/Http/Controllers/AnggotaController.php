@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exports\AnggotaExport;
 use App\Model\Anggota;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -30,8 +31,33 @@ class AnggotaController extends Controller
     {
     }
 
-    public function store()
+    public function store(Request $request)
     {
+        $input  = $request->all();
+        $rule   = [
+            'nama'         => 'required',
+            'email'        => 'required',
+            'telepon'      => 'required',
+            'alamat'       => 'required',
+
+        ];
+        $validation = Validator::make($input, $rule);
+        if ($validation->fails()) {
+            return response()->json([
+                'error' => 'Kesalahan saat mengisi form!'
+            ], 422);
+        }
+        $anggota = Anggota::updateOrCreate(['id' => $request->id], [
+            'nama_lengkap'           => $request->nama,
+            'email'           => $request->email,
+            'telepon'           => $request->telepon,
+            'alamat'           => $request->alamat,
+
+        ]);
+        return response()->json([
+            'success'   => 'Data berhasil disimpan!',
+            'data'      => $anggota
+        ], 200);
     }
 
     public function show()
