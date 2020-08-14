@@ -74,8 +74,14 @@ class AnggotaController extends Controller
     {
     }
 
-    public function destroy()
+    public function destroy($id)
     {
+        $anggota =  Anggota::find($id);
+        $anggota->delete();
+        return response()->json([
+            'success'   => 'Data berhasil hapus!',
+            'data'      => $anggota
+        ], 200);
     }
 
     public function exportexcel()
