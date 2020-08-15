@@ -28,4 +28,6 @@ Route::post('peminjaman/importexcel', 'PeminjamanController@importexcel')->name(
 Route::get('peminjaman/exportexcel', 'PeminjamanController@exportexcel')->name('peminjaman.exportexcel');
 Route::resource('peminjaman', 'PeminjamanController');
 
+Route::post('admin/importexcel', 'AdminController@importexcel')->name('admin.importexcel');
+Route::get('admin/exportexcel', 'AdminController@exportexcel')->name('admin.exportexcel');
 Route::resource('admin', 'AdminController');
