@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PeminjamanExport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
 class PeminjamanController extends Controller
@@ -57,5 +59,6 @@ class PeminjamanController extends Controller
     }
     public function exportexcel()
     {
+        return Excel::download(new PeminjamanExport, 'peminjaman.xlsx');
     }
 }

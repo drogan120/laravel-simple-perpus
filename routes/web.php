@@ -27,3 +27,5 @@ Route::resource('buku', 'BukuController');
 Route::post('peminjaman/importexcel', 'PeminjamanController@importexcel')->name('peminjaman.importexcel');
 Route::get('peminjaman/exportexcel', 'PeminjamanController@exportexcel')->name('peminjaman.exportexcel');
 Route::resource('peminjaman', 'PeminjamanController');
+
+Route::resource('admin', 'AdminController');

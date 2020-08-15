@@ -18,5 +18,11 @@
                 <p>Peminjaman</p>
             </a>
         </li>
+        <li class="active">
+            <a href="{{ route('admin.index') }}">
+                <i class="nc-icon nc-single-02"></i>
+                <p>Admin</p>
+            </a>
+        </li>
     </ul>
 </div>
