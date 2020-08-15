@@ -46,7 +46,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="ModalImportExportTitle">Import / Export Buku</h5>
+                <h5 class="modal-title" id="ModalImportExportTitle">Import / Export peminjaman</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -61,7 +61,8 @@
                                 </h4>
                             </div>
                             <div class="card-body">
-                                <a href="{{ route('buku.exportexcel')}}" class="btn btn-sm btn-danger">Export Excel</a>
+                                <a href="{{ route('peminjaman.exportexcel')}}" class="btn btn-sm btn-danger">Export
+                                    Excel</a>
                             </div>
                         </div>
                     </div>

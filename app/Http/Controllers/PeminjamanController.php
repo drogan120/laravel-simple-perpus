@@ -49,4 +49,13 @@ class PeminjamanController extends Controller
         }
         return view('peminjaman.index', compact('data'));
     }
+
+
+
+    public function importexcel()
+    {
+    }
+    public function exportexcel()
+    {
+    }
 }
