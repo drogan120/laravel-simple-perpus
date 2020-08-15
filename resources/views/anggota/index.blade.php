@@ -111,11 +111,12 @@
                                     Import
                                 </h4>
                                 <div class="card-body">
-                                    <form enctype="multipart/form-data">
+                                    <form enctype="multipart/form-data" action="{{ route('anggota.importexcel') }}"
+                                        method="POST">
                                         @csrf
                                         <div class="form-group">
-                                            <label for="importexcel">Import Excel</label>
-                                            <input type="text" class="form-control" name="importexcel">
+                                            <label for="data_anggota_excel">Import Excel</label>
+                                            <input type="file" class="form-control bg-danger" name="data_anggota_excel">
                                         </div>
                                         <button type="submit" class="btn btn-sm btn-info">Import</button>
                                     </form>

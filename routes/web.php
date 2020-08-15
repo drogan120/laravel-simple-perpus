@@ -17,6 +17,7 @@ Route::get('/', function () {
     return view('dashboard');
 });
 
+Route::post('anggota/importexcel', 'AnggotaController@importexcel')->name('anggota.importexcel');
 Route::get('anggota/exportexcel', 'AnggotaController@exportexcel')->name('anggota.exportexcel');
 Route::resource('anggota', 'AnggotaController');
 

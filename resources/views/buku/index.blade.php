@@ -143,7 +143,7 @@
                                         method="POST">
                                         @csrf
                                         <div class="form-group btn btn-danger">
-                                            <label for="importexcel">Import Excel</label>
+                                            <label for="data_buku_excel">Import Excel</label>
                                             <input type="file" class="form-control" name="data_buku_excel">
                                         </div>
                                         <button type="submit" class="btn btn-sm btn-info">Import</button>

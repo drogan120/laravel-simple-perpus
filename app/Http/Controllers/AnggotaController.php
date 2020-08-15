@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\AnggotaExport;
+use App\Imports\AnggotaImport;
 use App\Model\Anggota;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -82,6 +83,12 @@ class AnggotaController extends Controller
             'success'   => 'Data berhasil hapus!',
             'data'      => $anggota
         ], 200);
+    }
+
+    function importexcel(Request $request)
+    {
+        Excel::import(new AnggotaImport, $request->file('data_anggota_excel'));
+        return redirect('/anggota')->with('success', 'Data berhasil di import');
     }
 
     public function exportexcel()
