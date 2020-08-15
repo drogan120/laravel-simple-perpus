@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\AdminExport;
 use App\Model\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
 class AdminController extends Controller
@@ -69,5 +71,14 @@ class AdminController extends Controller
             'success'   => 'Data berhasil disimpan!',
             'data'      => $admin
         ], 200);
+    }
+
+    public function importexcel()
+    {
+    }
+
+    public function exportexcel()
+    {
+        return Excel::download(new AdminExport, 'admin.xlsx');
     }
 }
