@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\AdminExport;
+use App\Imports\AdminImport;
 use App\Model\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -73,8 +74,14 @@ class AdminController extends Controller
         ], 200);
     }
 
-    public function importexcel()
+    public function show()
     {
+        return 'hello';
+    }
+    public function importexcel(Request $request)
+    {
+        Excel::import(new AdminImport, $request->file('import_admin_excel'));
+        return redirect('/admin')->with('success', 'data berhasil di import');
     }
 
     public function exportexcel()
