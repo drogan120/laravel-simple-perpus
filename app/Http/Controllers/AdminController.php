@@ -78,13 +78,13 @@ class AdminController extends Controller
     {
         return 'hello';
     }
-    public function importexcel(Request $request)
+    public function importExcel(Request $request)
     {
         Excel::import(new AdminImport, $request->file('import_admin_excel'));
         return redirect('/admin')->with('success', 'data berhasil di import');
     }
 
-    public function exportexcel()
+    public function exportExcel()
     {
         return Excel::download(new AdminExport, 'admin.xlsx');
     }

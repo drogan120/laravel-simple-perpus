@@ -54,10 +54,10 @@ class PeminjamanController extends Controller
 
 
 
-    public function importexcel()
+    public function importExcel()
     {
     }
-    public function exportexcel()
+    public function exportExcel()
     {
         return Excel::download(new PeminjamanExport, 'peminjaman.xlsx');
     }

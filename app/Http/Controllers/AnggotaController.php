@@ -85,13 +85,13 @@ class AnggotaController extends Controller
         ], 200);
     }
 
-    function importexcel(Request $request)
+    function importExcel(Request $request)
     {
         Excel::import(new AnggotaImport, $request->file('data_anggota_excel'));
         return redirect('/anggota')->with('success', 'Data berhasil di import');
     }
 
-    public function exportexcel()
+    public function exportExcel()
     {
         return Excel::download(new AnggotaExport, 'anggota.xlsx');
     }

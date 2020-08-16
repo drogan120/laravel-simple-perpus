@@ -81,14 +81,14 @@ class BukuController extends Controller
         ], 200);
     }
 
-    public function importexcel(Request $request)
+    public function importExcel(Request $request)
     {
 
         Excel::import(new BukuImport, $request->file('data_buku_excel'));
         return redirect('/buku')->with('success', 'Buku berhasil di import');
     }
 
-    public function exportexcel()
+    public function exportExcel()
     {
         return Excel::download(new BukuExport, 'buku.xlsx');
     }
