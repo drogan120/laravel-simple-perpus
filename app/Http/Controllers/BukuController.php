@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\BukuExport;
+use App\Http\Requests\BukuRequest;
 use App\Imports\BukuImport;
 use App\Model\Buku;
 use Illuminate\Http\Request;
@@ -29,27 +30,8 @@ class BukuController extends Controller
         return view('buku.index', compact('buku'));
     }
 
-    public function store(Request $request)
+    public function store(BukuRequest $request)
     {
-
-        $input  = $request->all();
-        $rule   = [
-            'judul'           => 'required',
-            'pengarang'          => 'required',
-            'penerbit'         => 'required',
-            'isbn' => 'required',
-            'nomor_cetak'       => 'required',
-            'jumlah_halaman'  => 'required',
-            'tahun_terbit'     => 'required',
-            'sinopsis'    => 'nullable',
-
-        ];
-        $validation = Validator::make($input, $rule);
-        if ($validation->fails()) {
-            return response()->json([
-                'error' => 'Kesalahan saat mengisi form!'
-            ], 422);
-        }
         $buku = Buku::updateOrCreate(['id' => $request->id], [
             'judul'           => $request->judul,
             'pengarang'          => $request->pengarang,

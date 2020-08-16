@@ -56,6 +56,9 @@
                         <label for="judul">Judul</label>
                         <input type="hidden" name="id" id="id">
                         <input type="text" class="form-control" name="judul" id="judul">
+                        @error('title')
+                        Judul tidak boleh kosong
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="pengarang">Pengarang</label>
@@ -80,6 +83,7 @@
                             <div class="form-group">
                                 <label for="jumlah_halaman">Jumlah Halaman</label>
                                 <input type="number" name="jumlah_halaman" class="form-control" id="jumlah_halaman">
+                                <input type="date" name="" id="">
                             </div>
                         </div>
                         <div class="col-md-4">
