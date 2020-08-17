@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Exports\PeminjamanExport;
+use App\Http\Requests\PeminjamanRequest;
+use App\Model\Anggota;
+use App\Model\Buku;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
@@ -52,7 +55,19 @@ class PeminjamanController extends Controller
         return view('peminjaman.index', compact('data'));
     }
 
-
+    public function create(PeminjamanRequest $request)
+    {
+        $buku = Buku::find($request->isbn);
+        $anggota = Anggota::find($request->id_anggota);
+        $tanggal_kembali = date('Y-m-d', strtotime('+' . $request->durasi . ' days', strtotime($request->tanggal_pinjam)));
+        $data = [
+            'anggota_id'        => $anggota->id,
+            'buku_id'           => $buku->id,
+            'tanggal_pinjam'    => $request->tanggal_pinjam,
+            'tanggal_kembali'    => $tanggal_kembali,
+        ];
+        dd($data);
+    }
 
     public function importExcel()
     {

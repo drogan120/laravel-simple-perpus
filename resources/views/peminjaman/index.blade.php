@@ -15,7 +15,9 @@
                     data-target="#ModalImportExport">
                     Import / Export
                 </button>
-                <a href="#" class="btn btn-sm btn-primary">TAMBAH</a>
+                <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#peminjamanModal">
+                    TAMBAH
+                </button>
             </div>
         </div>
     </div>
@@ -75,9 +77,10 @@
                                 <div class="card-body">
                                     <form enctype="multipart/form-data">
                                         @csrf
-                                        <div class="form-group">
-                                            <label for="importexcel">Import Excel</label>
-                                            <input type="text" class="form-control" name="importexcel">
+                                        <div class="custom-file">
+                                            <label for="importexcel" class="custom-file-input bg-danger">Import
+                                                Excel</label>
+                                            <input type="file" class="custom-file-input" name="importexcel">
                                         </div>
                                         <button type="submit" class="btn btn-sm btn-info">Import</button>
                                     </form>
@@ -90,6 +93,53 @@
                     <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-sm btn-primary">Save changes</button>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Peminjaman-->
+<div class="modal fade" id="peminjamanModal" tabindex="-1" role="dialog" aria-labelledby="peminjamanModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="peminjamanModalLabel">Tambah Peminjaman</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('peminjaman.create') }}">
+                    @csrf
+                    <div class="form-group">
+                        <label for="id_anggota">ID Anggota</label>
+                        <input type="text" name="id_anggota" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="isbn">ISBN Buku</label>
+                        <input type="text" name="isbn" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="tanggal_pinjam">Tangggal Pinjam</label>
+                        <input type="date" name="tanggal_pinjam" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <select name="durasi" id="durasi" class="form-control">
+                            <option> Durasi Peminjaman - Hari -</option>
+                            <option value="1">1 Hari</option>
+                            <option value="2">2 Hari</option>
+                            <option value="3">3 Hari</option>
+                            <option value="4">4 Hari</option>
+                            <option value="5">5 Hari</option>
+                            <option value="6">6 Hari</option>
+                            <option value="7">7 Hari</option>
+                        </select>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Proses</button>
+                </form>
             </div>
         </div>
     </div>
