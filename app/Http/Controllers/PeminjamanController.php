@@ -17,11 +17,10 @@ class PeminjamanController extends Controller
     {
         $data = DB::table('anggota')->join('peminjaman', 'anggota.id', '=', 'peminjaman.anggota_id')->join('buku', 'buku.id', '=', 'peminjaman.buku_id')->get();
 
-
         if ($request->ajax()) {
             return DataTables::of($data)
                 ->addColumn('aksi', function ($row) {
-                    $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-warning btn-sm edit">Ubah</a>';
+                    $btn = '<a href="' . url('anggota') . '/' . $row->anggota_id . '" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-warning btn-sm edit">PROFILE</a>';
                     $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip" data-id="' . $row->id . '" data-original-title="Delete" class="btn btn-danger btn-sm delete">Hapus</i></a>';
                     return $btn;
                 })->addColumn('sisa_waktu', function ($row) {
