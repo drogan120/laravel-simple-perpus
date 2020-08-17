@@ -122,7 +122,8 @@
                     </div>
                     <div class="form-group">
                         <label for="tanggal_pinjam">Tangggal Pinjam</label>
-                        <input type="date" name="tanggal_pinjam" class="form-control">
+                        <input type="date" name="tanggal_pinjam" class="form-control" value="{{ date('Y-m-d') }}"
+                            readonly>
                     </div>
                     <div class="form-group">
                         <select name="durasi" id="durasi" class="form-control">

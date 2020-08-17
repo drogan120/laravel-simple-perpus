@@ -47,6 +47,9 @@ class PeminjamanController extends Controller
                     $selisih = $selisih / 86400;
                     $denda = $selisih * 10000;
                     $info = 'Rp. ' . number_format($denda);
+                    if ($denda <= 0) {
+                        return "Rp. 0,00 ";
+                    }
                     return $info;
                 })
                 ->rawColumns(['aksi', 'sisa_waktu'])
@@ -66,7 +69,7 @@ class PeminjamanController extends Controller
             'tanggal_pinjam'    => $request->tanggal_pinjam,
             'tanggal_kembali'    => $tanggal_kembali,
         ];
-        dd($data);
+        return view('peminjaman.proses', compact('buku', 'anggota'));
     }
 
     public function importExcel()
