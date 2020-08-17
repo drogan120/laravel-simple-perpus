@@ -61,8 +61,11 @@ class AnggotaController extends Controller
         ], 200);
     }
 
-    public function show()
+    public function show($id)
     {
+        $anggota = Anggota::find($id);
+        // dd($anggota);
+        return view('anggota.profile', compact('anggota'));
     }
 
     public function edit($id)
