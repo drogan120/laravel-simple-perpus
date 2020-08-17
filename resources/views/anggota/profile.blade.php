@@ -57,8 +57,8 @@
                             <td>{{ $buku->judul }}</td>
                             <td>{{ $buku->pengarang }}</td>
                             <td>{{ $buku->penerbit }}</td>
-                            <td>{{ $buku->tanggal_pinjam }}</td>
-                            <td>{{ $buku->tanggal_kembali }}</td>
+                            <td>{{ $buku->pivot->tanggal_pinjam }}</td>
+                            <td>{{ $buku->pivot->tanggal_kembali }}</td>
                         </tr>
                         @endforeach
                     </tbody>

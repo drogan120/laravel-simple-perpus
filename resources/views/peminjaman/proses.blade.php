@@ -28,14 +28,8 @@
                 <hr>
                 <div class="button-container">
                     <div class="row">
-                        <div class="col-lg-3 col-md-6 col-6 ml-auto">
-                            <h5>12<br><small>Files</small></h5>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-6 ml-auto mr-auto">
-                            <h5>2GB<br><small>Used</small></h5>
-                        </div>
-                        <div class="col-lg-3 mr-auto">
-                            <h5>24,6$<br><small>Spent</small></h5>
+                        <div class="col-lg-12 col-md-12 col-12 ml-auto">
+                            <h5>Jumlah Pinjaman<br>{{ $anggota->buku->count() }}</h5>
                         </div>
                     </div>
                 </div>
@@ -105,7 +99,7 @@
                     </div>
                     <div class="row">
                         <div class="update ml-auto mr-auto">
-                            <button type="submit" class="btn btn-primary btn-round">Update Profile</button>
+                            <button type="submit" class="btn btn-primary btn-round">Approve</button>
                         </div>
                     </div>
                 </form>
