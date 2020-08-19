@@ -120,23 +120,6 @@
                         <label for="isbn">ISBN Buku</label>
                         <input type="text" name="isbn" class="form-control">
                     </div>
-                    <div class="form-group">
-                        <label for="tanggal_pinjam">Tangggal Pinjam</label>
-                        <input type="date" name="tanggal_pinjam" class="form-control" value="{{ date('Y-m-d') }}"
-                            readonly>
-                    </div>
-                    <div class="form-group">
-                        <select name="durasi" id="durasi" class="form-control">
-                            <option> Durasi Peminjaman - Hari -</option>
-                            <option value="1">1 Hari</option>
-                            <option value="2">2 Hari</option>
-                            <option value="3">3 Hari</option>
-                            <option value="4">4 Hari</option>
-                            <option value="5">5 Hari</option>
-                            <option value="6">6 Hari</option>
-                            <option value="7">7 Hari</option>
-                        </select>
-                    </div>
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-primary">Proses</button>

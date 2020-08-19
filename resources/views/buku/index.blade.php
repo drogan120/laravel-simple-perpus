@@ -83,7 +83,6 @@
                             <div class="form-group">
                                 <label for="jumlah_halaman">Jumlah Halaman</label>
                                 <input type="number" name="jumlah_halaman" class="form-control" id="jumlah_halaman">
-                                <input type="date" name="" id="">
                             </div>
                         </div>
                         <div class="col-md-4">

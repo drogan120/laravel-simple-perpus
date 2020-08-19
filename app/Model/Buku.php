@@ -12,6 +12,6 @@ class Buku extends Model
     public function anggota()
     {
 
-        return $this->belongsToMany(Anggota::class);
+        return $this->belongsToMany(Anggota::class)->withPivot('judul');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\AnggotaBuku;
 use App\Exports\PeminjamanExport;
 use App\Http\Requests\PeminjamanRequest;
 use App\Model\Anggota;
@@ -15,8 +16,7 @@ class PeminjamanController extends Controller
 {
     public function index(Request $request)
     {
-        $data = DB::table('anggota')->join('peminjaman', 'anggota.id', '=', 'peminjaman.anggota_id')->join('buku', 'buku.id', '=', 'peminjaman.buku_id')->get();
-
+        $data = DB::table('anggota_buku')->join('buku', 'buku.id', '=', 'anggota_buku.buku_id')->join('anggota', 'anggota.id', '=', 'anggota_buku.anggota_id')->get();
         if ($request->ajax()) {
             return DataTables::of($data)
                 ->addColumn('aksi', function ($row) {
@@ -61,16 +61,23 @@ class PeminjamanController extends Controller
     {
         $buku = Buku::find($request->isbn);
         $anggota = Anggota::find($request->id_anggota);
-        $tanggal_kembali = date('Y-m-d', strtotime('+' . $request->durasi . ' days', strtotime($request->tanggal_pinjam)));
-        $data = [
-            'anggota_id'        => $anggota->id,
-            'buku_id'           => $buku->id,
-            'tanggal_pinjam'    => $request->tanggal_pinjam,
-            'tanggal_kembali'    => $tanggal_kembali,
-        ];
         return view('peminjaman.proses', compact('buku', 'anggota'));
     }
 
+    public function store(PeminjamanRequest $peminjamanRequest)
+    {
+
+        $tanggal_kembali = date('Y-m-d', strtotime('+' . $peminjamanRequest->durasi . ' days', strtotime($peminjamanRequest->tanggal_pinjam)));
+        $data = [
+            'anggota_id'        => $peminjamanRequest->anggota_id,
+            'buku_id'           => $peminjamanRequest->buku_id,
+            'tanggal_pinjam'    => $peminjamanRequest->tanggal_pinjam,
+            'tanggal_kembali'    => $tanggal_kembali,
+        ];
+
+        AnggotaBuku::create($data);
+        return redirect('/peminjaman')->with('success', 'Data berhasil di tambahkan');
+    }
     public function importExcel()
     {
     }
