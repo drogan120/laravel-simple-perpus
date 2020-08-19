@@ -12,7 +12,7 @@
             </div>
             <div class="card-body">
                 <div class="author">
-                    <a href="#">
+                    <a href="{{ url('anggota/'.$anggota->id) }}">
                         <img class="avatar border-gray" src="{{ asset('paper-admin/assets/img/mike.jpg') }}" alt="...">
                         <h5 class="title">{{ $anggota->nama_lengkap }}</h5>
                     </a>
@@ -124,7 +124,13 @@
                     </div>
                     <div class="row">
                         <div class="update ml-auto mr-auto">
+                            @if (!$anggota->buku->count() >= 1)
                             <button type="submit" class="btn btn-primary btn-round">Approve</button>
+                            @else
+                            <a href="{{ url('anggota/'.$anggota->id) }}" class="btn btn-danger btn-round">Anggota Belum
+                                Mengembalikan Buku</a>
+                            @endif
+
                         </div>
                     </div>
                 </form>
