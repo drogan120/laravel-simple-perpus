@@ -17,9 +17,10 @@ class AnggotaImport implements ToCollection
             if ($key >= 1) {
                 $anggota = [
                     'nama_lengkap' => $data[1],
-                    'email' => $data[2],
-                    'telepon' => $data[3],
-                    'alamat' => $data[4],
+                    'user_id' => $data[2],
+                    'email' => $data[3],
+                    'telepon' => $data[4],
+                    'alamat' => $data[5],
                 ];
                 Anggota::create($anggota);
             }

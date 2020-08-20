@@ -21,6 +21,7 @@ class AnggotaExport implements FromCollection, WithHeadings
         return [
             'id_anggota',
             'nama_lengkap',
+            'user_id',
             'email',
             'telepon',
             'alamat',

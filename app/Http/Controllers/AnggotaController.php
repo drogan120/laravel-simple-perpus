@@ -52,8 +52,17 @@ class AnggotaController extends Controller
                 'error' => 'Kesalahan saat mengisi form!'
             ], 422);
         }
+        $user = new \App\User();
+        $user->name = $request->nama;
+        $user->email = $request->email;
+        $user->password = bcrypt('anggota');
+        $user->role = "anggota";
+        $user->remember_token = \Str::random(60);
+        $user->save();
+
         $anggota = Anggota::updateOrCreate(['id' => $request->id], [
             'nama_lengkap'           => $request->nama,
+            'user_id' =>        $user->id,
             'email'           => $request->email,
             'telepon'           => $request->telepon,
             'alamat'           => $request->alamat,
