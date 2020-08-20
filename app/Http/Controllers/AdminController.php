@@ -45,13 +45,24 @@ class AdminController extends Controller
                 'error' => 'Kesalahan saat mengisi form!'
             ], 422);
         }
+        $user = new \App\User;
+        $user->name = $request->nama;
+        $user->email = $request->email;
+        $user->password = bcrypt('password');
+        $user->role = "admin";
+        $user->remember_token = \Str::random(60);
+        $user->save();
+
         $admin = Admin::updateOrCreate(['id' => $request->id], [
-            'nama_lengkap'           => $request->nama,
+            'user_id'         => $user->id,
+            'nama_lengkap'    => $request->nama,
             'email'           => $request->email,
-            'telepon'           => $request->telepon,
-            'alamat'           => $request->alamat,
+            'telepon'         => $request->telepon,
+            'alamat'          => $request->alamat,
 
         ]);
+
+
         return response()->json([
             'success'   => 'Data berhasil disimpan!',
             'data'      => $admin
