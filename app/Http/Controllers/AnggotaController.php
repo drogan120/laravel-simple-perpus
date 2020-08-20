@@ -17,12 +17,16 @@ class AnggotaController extends Controller
         $anggota = Anggota::all();
         if ($request->ajax()) {
             return DataTables::of($anggota)
+                ->addColumn('profile', function ($row) {
+                    $nama = '<a href="' . url('/anggota' . '/' . $row->id) . '">' . $row->nama_lengkap . '</a>';
+                    return $nama;
+                })
                 ->addColumn('aksi', function ($row) {
                     $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-warning btn-sm edit">Ubah</a>';
                     $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip" data-id="' . $row->id . '" data-original-title="Delete" class="btn btn-danger btn-sm delete">Hapus</i></a>';
                     return $btn;
                 })
-                ->rawColumns(['aksi'])
+                ->rawColumns(['aksi', 'profile'])
                 ->make(true);
         }
         return view('anggota.index', compact('anggota'));

@@ -153,7 +153,7 @@
 	      	processing: true,
 	      	ajax: '{{ route('anggota.index') }}',
 	      	columns: [
-	      		{data: 'nama_lengkap'},
+	      		{data: 'profile'},
 	      		{data: 'email'},
 	      		{data: 'telepon'},
 	      		{data: 'aksi'},
