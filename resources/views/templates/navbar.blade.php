@@ -22,14 +22,14 @@
                 <li class="nav-item btn-rotate dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
-                        Ali Mahmudin <i class="nc-icon nc-settings-gear-65"></i>
+                        {{ auth()->user()->email }} <i class="nc-icon nc-settings-gear-65"></i>
                         <p>
                             <span class="d-lg-none d-md-block">Some Actions</span>
                         </p>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="#">Profile</a>
-                        <a class="dropdown-item" href="#">Logout</a>
+                        <a class="dropdown-item" href="{{ url('/logout') }}">Logout</a>
                     </div>
                 </li>
             </ul>
