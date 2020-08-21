@@ -54,6 +54,12 @@ class BukuController extends Controller
         return response()->json($buku);
     }
 
+    public function show($id)
+    {
+        $buku =  Buku::findOrFail($id);
+        return view('buku.detail', compact('buku'));
+    }
+
     public function destroy($id)
     {
         $buku = Buku::find($id);

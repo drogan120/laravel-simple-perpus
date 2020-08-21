@@ -76,11 +76,8 @@ class AnggotaController extends Controller
 
     public function show($id)
     {
-        $anggota = Anggota::find($id);
-        foreach ($anggota->buku as $key => $data) {
+        $anggota = Anggota::findOrFail($id);
 
-            // dd($data);
-        }
         return view('anggota.profile', compact('anggota'));
     }
 
