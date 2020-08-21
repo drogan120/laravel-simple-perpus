@@ -67,7 +67,6 @@
                     </div>
                 </div>
                 <div class="text-center mx-auto">
-
                     <a href="#" class="btn btn-round btn-success">Request Pinjam</a>
                 </div>
             </div>

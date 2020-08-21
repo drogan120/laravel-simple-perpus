@@ -18,12 +18,16 @@ class AdminController extends Controller
 
         if ($request->ajax()) {
             return DataTables::of($admin)
+                ->addColumn('nama', function ($row) {
+                    $nama = '<a href="' . url('admin') . '/' . $row->id . '">' . $row->nama_lengkap . '</a>';
+                    return $nama;
+                })
                 ->addColumn('aksi', function ($row) {
                     $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-warning btn-sm edit">Ubah</a>';
                     $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip" data-id="' . $row->id . '" data-original-title="Delete" class="btn btn-danger btn-sm delete">Hapus</i></a>';
                     return $btn;
                 })
-                ->rawColumns(['aksi'])
+                ->rawColumns(['aksi', 'nama'])
                 ->make(true);
         }
         return view('admin.index', compact('admin'));
@@ -85,9 +89,10 @@ class AdminController extends Controller
         ], 200);
     }
 
-    public function show()
+    public function show($id)
     {
-        return 'hello';
+        $profile = Admin::findOrFail($id);
+        return view('admin.profile', compact('profile'));
     }
     public function importExcel(Request $request)
     {

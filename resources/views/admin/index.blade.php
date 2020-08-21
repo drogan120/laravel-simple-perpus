@@ -153,7 +153,7 @@
 	      	processing: true,
 	      	ajax: '{{ route('admin.index') }}',
 	      	columns: [
-	      		{data: 'nama_lengkap'},
+	      		{data: 'nama'},
 	      		{data: 'email'},
 	      		{data: 'telepon'},
 	      		{data: 'aksi'},
