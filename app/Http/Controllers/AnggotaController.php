@@ -3,16 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Exports\AnggotaExport;
+use App\Http\Requests\AnggotaRequest;
 use App\Imports\AnggotaImport;
 use App\Model\Anggota;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
 class AnggotaController extends Controller
 {
-    public function index(Request $request)
+    public function index(AnggotaRequest $request)
     {
         $anggota = Anggota::all();
         if ($request->ajax()) {
@@ -36,17 +35,10 @@ class AnggotaController extends Controller
     {
     }
 
-    public function store(Request $request)
+    public function store(AnggotaRequest $request)
     {
         $input  = $request->all();
-        $rule   = [
-            'nama'         => 'required',
-            'email'        => 'required',
-            'telepon'      => 'required',
-            'alamat'       => 'required',
 
-        ];
-        $validation = Validator::make($input, $rule);
         if ($validation->fails()) {
             return response()->json([
                 'error' => 'Kesalahan saat mengisi form!'
@@ -101,7 +93,7 @@ class AnggotaController extends Controller
         ], 200);
     }
 
-    function importExcel(Request $request)
+    function importExcel(AnggotaRequest $request)
     {
         Excel::import(new AnggotaImport, $request->file('data_anggota_excel'));
         return redirect('/anggota')->with('success', 'Data berhasil di import');

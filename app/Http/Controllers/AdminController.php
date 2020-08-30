@@ -3,16 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Exports\AdminExport;
+use App\Http\Requests\AdminRequest;
 use App\Imports\AdminImport;
 use App\Model\Admin;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
 class AdminController extends Controller
 {
-    public function index(Request $request)
+    public function index(AdminRequest $request)
     {
         $admin = Admin::all();
 
@@ -33,22 +32,9 @@ class AdminController extends Controller
         return view('admin.index', compact('admin'));
     }
 
-    public function store(Request $request)
+    public function store(AdminRequest $request)
     {
         $input  = $request->all();
-        $rule   = [
-            'nama'         => 'required',
-            'email'        => 'required',
-            'telepon'      => 'required',
-            'alamat'       => 'required',
-
-        ];
-        $validation = Validator::make($input, $rule);
-        if ($validation->fails()) {
-            return response()->json([
-                'error' => 'Kesalahan saat mengisi form!'
-            ], 422);
-        }
         $user = new \App\User;
         $user->name = $request->nama;
         $user->email = $request->email;
@@ -65,7 +51,6 @@ class AdminController extends Controller
             'alamat'          => $request->alamat,
 
         ]);
-
 
         return response()->json([
             'success'   => 'Data berhasil disimpan!',
@@ -94,7 +79,7 @@ class AdminController extends Controller
         $profile = Admin::findOrFail($id);
         return view('admin.profile', compact('profile'));
     }
-    public function importExcel(Request $request)
+    public function importExcel(AdminRequest $request)
     {
         Excel::import(new AdminImport, $request->file('import_admin_excel'));
         return redirect('/admin')->with('success', 'data berhasil di import');
