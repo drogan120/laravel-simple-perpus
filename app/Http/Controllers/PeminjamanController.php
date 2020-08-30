@@ -14,7 +14,7 @@ use Yajra\DataTables\Facades\DataTables;
 
 class PeminjamanController extends Controller
 {
-    public function index(Request $request)
+    public function index(PeminjamanRequest $request)
     {
         $data = DB::table('anggota_buku')->join('buku', 'buku.id', '=', 'anggota_buku.buku_id')->join('anggota', 'anggota.id', '=', 'anggota_buku.anggota_id')->get();
         if ($request->ajax()) {
