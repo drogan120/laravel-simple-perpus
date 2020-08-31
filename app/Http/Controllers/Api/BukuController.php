@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Model\Buku;
-use Illuminate\Http\Request;
 
 class BukuController extends Controller
 {

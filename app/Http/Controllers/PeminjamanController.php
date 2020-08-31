@@ -7,7 +7,6 @@ use App\Exports\PeminjamanExport;
 use App\Http\Requests\PeminjamanRequest;
 use App\Model\Anggota;
 use App\Model\Buku;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;

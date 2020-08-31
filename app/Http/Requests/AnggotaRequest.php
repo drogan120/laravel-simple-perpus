@@ -13,7 +13,7 @@ class AnggotaRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class AnggotaRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'nama'         => 'required',
+            'email'        => 'required',
+            'telepon'      => 'required',
+            'alamat'       => 'required',
         ];
     }
 }

@@ -13,17 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard');
-});
+
 
 Route::get('/login', 'AuthController@index')->name('login');
 Route::post('/login', 'AuthController@login')->name('login');
 Route::get('/logout', 'AuthController@logout');
 
 Route::group(['middleware' => 'auth'], function () {
-
-    Route::resource('/dashboard', 'DashboardController')->middleware('auth');
+    Route::resource('/', 'DashboardController');
 
     Route::post('anggota/importexcel', 'AnggotaController@importexcel')->name('anggota.importexcel');
     Route::get('anggota/exportexcel', 'AnggotaController@exportexcel')->name('anggota.exportexcel');
