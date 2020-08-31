@@ -14,14 +14,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+Route::get('/', function () {
+    return view('dashboard.index');
+});
 
 Route::get('/login', 'AuthController@index')->name('login');
 Route::post('/login', 'AuthController@login')->name('login');
 Route::get('/logout', 'AuthController@logout');
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::resource('/', 'DashboardController');
-
+    Route::resource('Dashboard', 'DashboardController');
     Route::post('anggota/importexcel', 'AnggotaController@importexcel')->name('anggota.importexcel');
     Route::get('anggota/exportexcel', 'AnggotaController@exportexcel')->name('anggota.exportexcel');
     Route::resource('anggota', 'AnggotaController');

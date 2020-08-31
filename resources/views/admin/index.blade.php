@@ -151,7 +151,7 @@
     let table = $('#datatable').DataTable({
 	      	serverSide: true,
 	      	processing: true,
-	      	ajax: '{{ route('admin.index') }}',
+	      	ajax: '{{ url('/admin') }}',
 	      	columns: [
 	      		{data: 'nama'},
 	      		{data: 'email'},

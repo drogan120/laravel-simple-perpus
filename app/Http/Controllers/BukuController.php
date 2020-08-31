@@ -7,7 +7,6 @@ use App\Http\Requests\BukuRequest;
 use App\Imports\BukuImport;
 use App\Model\Buku;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 

@@ -6,12 +6,13 @@ use App\Exports\AnggotaExport;
 use App\Http\Requests\AnggotaRequest;
 use App\Imports\AnggotaImport;
 use App\Model\Anggota;
+use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
 class AnggotaController extends Controller
 {
-    public function index(AnggotaRequest $request)
+    public function index(Request $request)
     {
         $anggota = Anggota::all();
         if ($request->ajax()) {

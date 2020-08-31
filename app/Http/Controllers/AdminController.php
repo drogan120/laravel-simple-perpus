@@ -6,12 +6,13 @@ use App\Exports\AdminExport;
 use App\Http\Requests\AdminRequest;
 use App\Imports\AdminImport;
 use App\Model\Admin;
+use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
 class AdminController extends Controller
 {
-    public function index(AdminRequest $request)
+    public function index(Request $request)
     {
         $admin = Admin::all();
 
